@@ -61,7 +61,6 @@ public class CharacterControl : MonoBehaviour
         float horizontalMove = horizontalSpeed * swerveInp.MoveFactorX * Time.deltaTime;
         horizontalMove = Mathf.Clamp(horizontalMove, -1.5f, 1.5f);
         transform.Translate(horizontalMove, 0, verticalSpeed * Time.deltaTime);
-        Debug.Log("movement geldi");
     }
 
     void LevelFailed()

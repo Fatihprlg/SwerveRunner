@@ -6,15 +6,13 @@ public class Obstacle : MonoBehaviour
 {
     [SerializeField] int damage = 1;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        CharacterControl characterControl = collision.collider.GetComponent<CharacterControl>();
-        if(characterControl != null)
+        CharacterControl characterControl = other.GetComponent<CharacterControl>();
+        if (characterControl != null)
         {
             characterControl.DealDamage(damage);
-            GetComponent<BoxCollider>().isTrigger = true;
         }
     }
-
    
 }
