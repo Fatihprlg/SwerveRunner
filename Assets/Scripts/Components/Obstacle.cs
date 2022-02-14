@@ -14,5 +14,5 @@ public class Obstacle : MonoBehaviour
             characterControl.DealDamage(damage);
         }
     }
-   
+
 }
