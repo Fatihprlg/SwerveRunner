@@ -11,6 +11,7 @@ public class CharacterControl : MonoBehaviour
     private SwerveInput swerveInp;
     private int health;
     private int collectedGems;
+    private bool damagable = true;
 
     public static CharacterControl Instance { get { return _instance; } }
     [HideInInspector] public Animator animatorController;
@@ -44,13 +45,17 @@ public class CharacterControl : MonoBehaviour
 
     public void DealDamage(int damage)
     {
-        health -= damage;
-        InGameUI.Instance.UpdateHealthTxt(health);
-        if (health <= 0)
+        if (damagable)
         {
-            LevelFailed();
+            health -= damage;
+            InGameUI.Instance.UpdateHealthTxt(health);
+            if (health <= 0)
+            {
+                LevelFailed();
+            }
+            else StartCoroutine(DamageEffect());
         }
-        else StartCoroutine(DamageEffect());
+        
     }
 
     public void LevelPassed()
@@ -93,6 +98,7 @@ public class CharacterControl : MonoBehaviour
 
     IEnumerator DamageEffect()
     {
+        damagable = false;
         for(int i = 0; i <4; i++)
         {
             charRenderer.enabled = false;
@@ -100,6 +106,7 @@ public class CharacterControl : MonoBehaviour
             charRenderer.enabled = true;
             yield return new WaitForSeconds(0.15f);
         }
+        damagable = true;
     }
 
 

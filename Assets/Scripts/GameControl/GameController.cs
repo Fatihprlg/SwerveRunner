@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
 
     void StartGame()
     {
-        if (Input.GetMouseButtonDown(0) && (!isFailed || !isSuccess))
+        if (Input.GetMouseButtonDown(0) && (!isFailed && !isSuccess))
         {
             CharacterControl.Instance.isGameRunning = true;
             CharacterControl.Instance.animatorController.SetBool("isRunning", true);
