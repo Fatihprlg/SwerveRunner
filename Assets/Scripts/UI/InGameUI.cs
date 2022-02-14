@@ -9,14 +9,20 @@ public class InGameUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthTxt;
     [SerializeField] TextMeshProUGUI levelTxt;
 
-    public static InGameUI instance;
+    private static InGameUI _instance;
+
+    public static InGameUI Instance { get { return _instance; } }
 
     void Start()
     {
         levelTxt.text = SceneManager.GetActiveScene().name.ToUpper();
-        if (instance == null)
+        if (_instance != null && _instance != this)
         {
-            instance = this;
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
         }
     }
 

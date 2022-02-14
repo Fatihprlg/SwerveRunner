@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController instance;
+    private static GameController _instance;
+
+    public static GameController Instance { get { return _instance; } }
     public bool isFailed = false, isSuccess = false;
     //public int gemMultiplier;
 
@@ -15,8 +17,14 @@ public class GameController : MonoBehaviour
     {
         //gemMultiplier = PlayerPrefs.GetInt("GemsMultiplier", 1);
         totalGems = PlayerPrefs.GetInt("TotalGems", 0);
-        if (instance == null)
-            instance = this;
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
     private void Update()
     {
@@ -31,10 +39,10 @@ public class GameController : MonoBehaviour
 
     void StartGame()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && (!isFailed || !isSuccess))
         {
-            CharacterControl.instance.isGameRunning = true;
-            CharacterControl.instance.animatorController.SetBool("isRunning", true);
+            CharacterControl.Instance.isGameRunning = true;
+            CharacterControl.Instance.animatorController.SetBool("isRunning", true);
         }
     }
    /* public void SetGemsMultiplier(int value)

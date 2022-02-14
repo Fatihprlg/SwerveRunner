@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour
 {
-    [SerializeField] float verticalSpeed = 5, horizontalSpeed = 5;
-
-    public int maxHeatlh;
-    public static CharacterControl instance;
-    public Animator animatorController;
-    public bool isGameRunning = false;
-
-    private int health;
+    [SerializeField] private float verticalSpeed = 5, horizontalSpeed = 2;
+    [SerializeField] private Renderer charRenderer;
+    private static CharacterControl _instance;
     private SwerveInput swerveInp;
+    private int health;
     private int collectedGems;
+
+    public static CharacterControl Instance { get { return _instance; } }
+    [HideInInspector] public Animator animatorController;
+    public int maxHeatlh;
+    public bool isGameRunning = false;
 
     void Start()
     {
@@ -22,9 +23,14 @@ public class CharacterControl : MonoBehaviour
         swerveInp = GetComponent<SwerveInput>();
         animatorController = GetComponent<Animator>();
         collectedGems = 0;
-        if (instance == null)
+
+        if (_instance != null && _instance != this)
         {
-            instance = this;
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
         }
     }
 
@@ -39,24 +45,26 @@ public class CharacterControl : MonoBehaviour
     public void DealDamage(int damage)
     {
         health -= damage;
-        InGameUI.instance.UpdateHealthTxt(health);
+        InGameUI.Instance.UpdateHealthTxt(health);
         if (health <= 0)
         {
             LevelFailed();
         }
+        else StartCoroutine(DamageEffect());
     }
 
     public void LevelPassed()
     {
         isGameRunning = false;
-        GameController.instance.AddTotalGems(collectedGems);
+        GameController.Instance.AddTotalGems(collectedGems);
         animatorController.SetBool("isVictory", true);
+        GameController.Instance.isSuccess = true;
     }
 
     public void TakeGem()
     {
         collectedGems++;
-        InGameUI.instance.UpdateScoreTxt(collectedGems);
+        InGameUI.Instance.UpdateScoreTxt(collectedGems);
     }
 
 
@@ -80,9 +88,19 @@ public class CharacterControl : MonoBehaviour
         /*        collectedGems = 0;
                 health = maxHeatlh;*/
         isGameRunning = false;
+        GameController.Instance.isFailed = true;
     }
 
-
+    IEnumerator DamageEffect()
+    {
+        for(int i = 0; i <4; i++)
+        {
+            charRenderer.enabled = false;
+            yield return new WaitForSeconds(0.15f);
+            charRenderer.enabled = true;
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
 
 
 }
