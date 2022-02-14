@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] Vector3 offset;
     [SerializeField] float camSpeed = 3;
 
-    void Update()
+    void LateUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, target.transform.position + offset, Time.deltaTime * camSpeed);
     }

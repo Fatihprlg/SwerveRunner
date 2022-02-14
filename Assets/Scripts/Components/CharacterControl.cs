@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour
 {
     [SerializeField] float verticalSpeed = 5, horizontalSpeed = 5;
-    [SerializeField] int maxHeatlh;
 
+    public int maxHeatlh;
     public static CharacterControl instance;
     public Animator animatorController;
     public bool isGameRunning = false;
@@ -21,7 +22,7 @@ public class CharacterControl : MonoBehaviour
         swerveInp = GetComponent<SwerveInput>();
         animatorController = GetComponent<Animator>();
         collectedGems = 0;
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -29,15 +30,16 @@ public class CharacterControl : MonoBehaviour
 
     void Update()
     {
-        if(isGameRunning)
+        if (isGameRunning)
         {
             PlayerMovement();
-        }    
+        }
     }
 
     public void DealDamage(int damage)
     {
         health -= damage;
+        InGameUI.instance.UpdateHealthTxt(health);
         if (health <= 0)
         {
             LevelFailed();
@@ -54,20 +56,29 @@ public class CharacterControl : MonoBehaviour
     public void TakeGem()
     {
         collectedGems++;
+        InGameUI.instance.UpdateScoreTxt(collectedGems);
     }
+
 
     void PlayerMovement()
     {
         float horizontalMove = horizontalSpeed * swerveInp.MoveFactorX * Time.deltaTime;
-        horizontalMove = Mathf.Clamp(horizontalMove, -1.5f, 1.5f);
+
+        horizontalMove = Mathf.Clamp(horizontalMove, -1, 1);
+
         transform.Translate(horizontalMove, 0, verticalSpeed * Time.deltaTime);
+        var pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, -1.5f, 1.5f);
+        transform.position = pos;
     }
 
     void LevelFailed()
     {
         animatorController.SetBool("isFailed", true);
-/*        collectedGems = 0;
-        health = maxHeatlh;*/
+        animatorController.SetBool("isRunning", false);
+
+        /*        collectedGems = 0;
+                health = maxHeatlh;*/
         isGameRunning = false;
     }
 
