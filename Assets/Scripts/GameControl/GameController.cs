@@ -8,15 +8,21 @@ public class GameController : MonoBehaviour
 
     public static GameController Instance { get { return _instance; } }
     public bool isFailed = false, isSuccess = false;
-    //public int gemMultiplier;
 
+    public int gemMultiplier;
+    public int maxHealth;
+
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject InGameMenu;
     private int totalGems;
-    
+
 
     void Start()
     {
-        //gemMultiplier = PlayerPrefs.GetInt("GemsMultiplier", 1);
+        gemMultiplier = PlayerPrefs.GetInt("GemsMultiplier", 1);
         totalGems = PlayerPrefs.GetInt("TotalGems", 0);
+        maxHealth = PlayerPrefs.GetInt("MaxHealth", 3);
+        mainMenu.SetActive(true);
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -26,9 +32,10 @@ public class GameController : MonoBehaviour
             _instance = this;
         }
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        StartGame();
+        if (!MainMenu.Instance.onMenu)
+            StartGame();
     }
 
     public void AddTotalGems(int value)
@@ -37,17 +44,56 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("TotalGems", totalGems);
     }
 
-    void StartGame()
+    public void StartGame()
     {
-        if (Input.GetMouseButtonDown(0) && (!isFailed && !isSuccess))
+        if (Input.GetMouseButtonDown(0) && (!isSuccess && !isFailed))
         {
             CharacterControl.Instance.isGameRunning = true;
             CharacterControl.Instance.animatorController.SetBool("isRunning", true);
+            mainMenu.SetActive(false);
+            InGameMenu.SetActive(true);
         }
     }
-   /* public void SetGemsMultiplier(int value)
+
+    public void LevelPassed()
     {
-        gemMultiplier = value;
-        PlayerPrefs.SetInt("GemsMultiplier", value);
-    }*/
+
+        CharacterControl.Instance.isGameRunning = false;
+        AddTotalGems(CharacterControl.Instance.collectedGems);
+        CharacterControl.Instance.animatorController.SetBool("isVictory", true);
+        isSuccess = true;
+    }
+
+    public void LevelFailed()
+    {
+        CharacterControl.Instance.animatorController.SetBool("isFailed", true);
+        CharacterControl.Instance.animatorController.SetBool("isRunning", false);
+        CharacterControl.Instance.isGameRunning = false;
+        isFailed = true;
+    }
+    public bool SetGemsMultiplier()
+    {
+        if (totalGems >= (gemMultiplier * 10))
+        {
+            gemMultiplier++;
+            PlayerPrefs.SetInt("GemsMultiplier", gemMultiplier);
+            totalGems -= (maxHealth * 20);
+            PlayerPrefs.SetInt("TotalGems", totalGems);
+            return true;
+        }
+        else return false;
+    }
+    public bool SetMaxHealth()
+    {
+        if (totalGems >= (maxHealth * 20))
+        {
+            maxHealth++;
+            PlayerPrefs.SetInt("MaxHealth", maxHealth);
+            totalGems -= (maxHealth * 20);
+            PlayerPrefs.SetInt("TotalGems", totalGems);
+            CharacterControl.Instance.Refresh();
+            return true;
+        }
+        else return false;
+    }
 }

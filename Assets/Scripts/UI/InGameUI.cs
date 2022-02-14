@@ -12,10 +12,11 @@ public class InGameUI : MonoBehaviour
     private static InGameUI _instance;
 
     public static InGameUI Instance { get { return _instance; } }
-
+    
     void Start()
     {
         levelTxt.text = SceneManager.GetActiveScene().name.ToUpper();
+        UpdateHealthTxt(PlayerPrefs.GetInt("MaxHealth", 3));
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);

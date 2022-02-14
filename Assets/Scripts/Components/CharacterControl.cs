@@ -10,20 +10,22 @@ public class CharacterControl : MonoBehaviour
     private static CharacterControl _instance;
     private SwerveInput swerveInp;
     private int health;
-    private int collectedGems;
     private bool damagable = true;
+    private int maxHeatlh;
 
+    public int collectedGems;
     public static CharacterControl Instance { get { return _instance; } }
     [HideInInspector] public Animator animatorController;
-    public int maxHeatlh;
     public bool isGameRunning = false;
 
     void Start()
     {
+        maxHeatlh = PlayerPrefs.GetInt("MaxHealth", 3);
         health = maxHeatlh;
         swerveInp = GetComponent<SwerveInput>();
         animatorController = GetComponent<Animator>();
         collectedGems = 0;
+        
 
         if (_instance != null && _instance != this)
         {
@@ -43,6 +45,12 @@ public class CharacterControl : MonoBehaviour
         }
     }
 
+    public void Refresh()
+    {
+        maxHeatlh = PlayerPrefs.GetInt("MaxHealth", 3);
+        health = maxHeatlh;
+    }
+
     public void DealDamage(int damage)
     {
         if (damagable)
@@ -51,27 +59,18 @@ public class CharacterControl : MonoBehaviour
             InGameUI.Instance.UpdateHealthTxt(health);
             if (health <= 0)
             {
-                LevelFailed();
+                GameController.Instance.LevelFailed();
             }
             else StartCoroutine(DamageEffect());
         }
         
     }
 
-    public void LevelPassed()
-    {
-        isGameRunning = false;
-        GameController.Instance.AddTotalGems(collectedGems);
-        animatorController.SetBool("isVictory", true);
-        GameController.Instance.isSuccess = true;
-    }
-
     public void TakeGem()
     {
-        collectedGems++;
+        collectedGems += GameController.Instance.gemMultiplier;
         InGameUI.Instance.UpdateScoreTxt(collectedGems);
     }
-
 
     void PlayerMovement()
     {
@@ -83,17 +82,6 @@ public class CharacterControl : MonoBehaviour
         var pos = transform.position;
         pos.x = Mathf.Clamp(pos.x, -1.5f, 1.5f);
         transform.position = pos;
-    }
-
-    void LevelFailed()
-    {
-        animatorController.SetBool("isFailed", true);
-        animatorController.SetBool("isRunning", false);
-
-        /*        collectedGems = 0;
-                health = maxHeatlh;*/
-        isGameRunning = false;
-        GameController.Instance.isFailed = true;
     }
 
     IEnumerator DamageEffect()
@@ -108,6 +96,7 @@ public class CharacterControl : MonoBehaviour
         }
         damagable = true;
     }
+
 
 
 }
