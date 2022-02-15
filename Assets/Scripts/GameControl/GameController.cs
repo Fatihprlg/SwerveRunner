@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
         CharacterControl.Instance.animatorController.SetBool("isVictory", true);
         isSuccess = true;
         passedMenu.SetActive(true);
-        Invoke("NextLevel", 3f);
+        InGameMenu.SetActive(false);
     }
 
     public void LevelFailed()
@@ -75,12 +75,12 @@ public class GameController : MonoBehaviour
         CharacterControl.Instance.isGameRunning = false;
         isFailed = true;
         failedMenu.SetActive(true);
-        Invoke("ReturnMenu", 2f);
+        InGameMenu.SetActive(false);
     }
 
-    void ReturnMenu() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    public void ReturnMenu() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-    void NextLevel()
+    public void NextLevel()
     {
         if (SceneManager.sceneCount >= SceneManager.GetActiveScene().buildIndex + 2)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
