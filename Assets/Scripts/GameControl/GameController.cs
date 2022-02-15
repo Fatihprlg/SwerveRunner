@@ -34,11 +34,6 @@ public class GameController : MonoBehaviour
             _instance = this;
         }
     }
-    private void FixedUpdate()
-    {
-        if (!MainMenu.Instance.onMenu)
-            StartGame();
-    }
 
 
     public void AddTotalGems(int value)
@@ -49,7 +44,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        if (Input.GetMouseButtonDown(0) && (!isSuccess && !isFailed))
+        if (!isSuccess && !isFailed)
         {
             CharacterControl.Instance.isGameRunning = true;
             CharacterControl.Instance.animatorController.SetBool("isRunning", true);

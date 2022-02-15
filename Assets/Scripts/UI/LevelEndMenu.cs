@@ -11,7 +11,6 @@ public class LevelEndMenu : MonoBehaviour
     int _collectedGems;
     int _totalGems;
 
-    // Start is called before the first frame update
     void Start()
     {
         _collectedGems = CharacterControl.Instance.collectedGems;

@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     private static MainMenu _instance;
 
     public static MainMenu Instance { get { return _instance; } }
-    public bool onMenu = false;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -27,8 +27,7 @@ public class MainMenu : MonoBehaviour
         {
             _instance = this;
         }
-        gemsTxt.text = PlayerPrefs.GetInt("TotalGems", 0).ToString();
-        multiplierTxt.text = "x" + PlayerPrefs.GetInt("GemsMultiplier", 1).ToString();
+        Refresh();
 
         isSoundMuted = PlayerPrefs.GetInt("isSoundMuted", 0);
     }
@@ -56,11 +55,9 @@ public class MainMenu : MonoBehaviour
         if (soundButton.activeInHierarchy)
         {
             soundButton.SetActive(false);
-            onMenu = false;
         }
         else
         {
-            onMenu = true;
             soundButton.SetActive(true);
         }
     }
@@ -70,12 +67,10 @@ public class MainMenu : MonoBehaviour
         if (shopMenu.activeInHierarchy)
         {
             shopMenu.SetActive(false);
-            onMenu = false;
             Refresh();
         }
         else
         {
-            onMenu = true;
             shopMenu.SetActive(true);
         }
     }

@@ -83,7 +83,6 @@ public class ShopMenu : MonoBehaviour
     {
         shopMenu.SetActive(false);
         MainMenu.Instance.Refresh();
-        MainMenu.Instance.onMenu = false;
     }
 
     IEnumerator ShowMoneyTxt()
