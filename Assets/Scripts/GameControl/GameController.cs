@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject InGameMenu;
+    [SerializeField] GameObject passedMenu;
+    [SerializeField] GameObject failedMenu;
     private int totalGems;
-
 
     void Start()
     {
@@ -38,6 +40,7 @@ public class GameController : MonoBehaviour
             StartGame();
     }
 
+
     public void AddTotalGems(int value)
     {
         totalGems += value;
@@ -57,11 +60,12 @@ public class GameController : MonoBehaviour
 
     public void LevelPassed()
     {
-
         CharacterControl.Instance.isGameRunning = false;
         AddTotalGems(CharacterControl.Instance.collectedGems);
         CharacterControl.Instance.animatorController.SetBool("isVictory", true);
         isSuccess = true;
+        passedMenu.SetActive(true);
+        Invoke("NextLevel", 3f);
     }
 
     public void LevelFailed()
@@ -70,7 +74,20 @@ public class GameController : MonoBehaviour
         CharacterControl.Instance.animatorController.SetBool("isRunning", false);
         CharacterControl.Instance.isGameRunning = false;
         isFailed = true;
+        failedMenu.SetActive(true);
+        Invoke("ReturnMenu", 2f);
     }
+
+    void ReturnMenu() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    void NextLevel()
+    {
+        if (SceneManager.sceneCount >= SceneManager.GetActiveScene().buildIndex + 2)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else ReturnMenu();
+        
+    }
+
     public bool SetGemsMultiplier()
     {
         if (totalGems >= (gemMultiplier * 10))
