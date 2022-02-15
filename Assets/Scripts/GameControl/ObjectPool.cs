@@ -5,9 +5,11 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     private static ObjectPool _instance;
+    //private List<GameObject> pooledObjects = new List<GameObject>();
 
     public static ObjectPool Instance { get { return _instance; } }
     [SerializeField] List<PoolInfo> poolInfos;
+    
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class ObjectPool : MonoBehaviour
         {
             CreatePool(inf);
         }
+        //SolveConflicts();
     }
 
     void CreatePool(PoolInfo info)
@@ -31,20 +34,33 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < info.poolSize; i++)
         {
             GameObject obj = Instantiate(info.prefab, info.container.transform);
+
             float xPos = Random.Range(-info.xPositionLimit, info.xPositionLimit);
             float zPos = (info.prefabSize * i) + Random.Range(0, 5);
-            while (info.poolObjects.Find(x => x.transform.position.z <= (zPos + info.prefabSize) && x.transform.position.z >= (zPos - info.prefabSize)) != null)
+           // while (info.poolObjects.Find(x => x.transform.position.z <= (zPos + info.prefabSize) && x.transform.position.z >= (zPos - info.prefabSize)) != null)
+            while(info.poolObjects.Exists(x => (x.transform.position - obj.transform.position).magnitude < info.prefabSize)) 
                 zPos += info.prefabSize;
             
             if (zPos > info.zPositionLimit)
                 obj.SetActive(false);
 
             obj.transform.position = new Vector3(xPos, info.yPosition, zPos);
-                
+            
             info.poolObjects.Add(obj);
+            //this.pooledObjects.Add(obj);
         }
     }
 
+   /* void SolveConflicts()
+    {
+        
+        for (int i = 0; i <= Mathf.Round(pooledObjects.Count / 2); i++)
+        {
+            if (pooledObjects.Exists(x => (x.transform.position - pooledObjects[i].transform.position).magnitude < 3))
+                RelocatePooledObject(pooledObjects[i]);
+        }
+    }
+*/
     public void RelocatePooledObject(GameObject obj)
     {
         PoolInfo poolInfo = null;
