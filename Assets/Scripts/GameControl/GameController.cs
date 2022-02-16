@@ -6,18 +6,18 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     private static GameController _instance;
-
-    public static GameController Instance { get { return _instance; } }
-    public bool isFailed = false, isSuccess = false;
-
-    public int gemMultiplier;
-    public int maxHealth;
+    private int totalGems;
 
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject InGameMenu;
     [SerializeField] GameObject passedMenu;
     [SerializeField] GameObject failedMenu;
-    private int totalGems;
+
+    public static GameController Instance { get { return _instance; } }
+
+    [HideInInspector] public bool isFailed = false, isSuccess = false;
+    [HideInInspector] public int gemMultiplier;
+    [HideInInspector] public int maxHealth;
 
     void Start()
     {

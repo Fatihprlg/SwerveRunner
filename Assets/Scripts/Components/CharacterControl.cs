@@ -7,16 +7,18 @@ public class CharacterControl : MonoBehaviour
 {
     [SerializeField] private float verticalSpeed = 5, horizontalSpeed = 2;
     [SerializeField] private Renderer charRenderer;
+
     private static CharacterControl _instance;
     private SwerveInput swerveInp;
     private int health;
     private bool damagable = true;
     private int maxHeatlh;
 
-    public int collectedGems;
     public static CharacterControl Instance { get { return _instance; } }
+    
+    [HideInInspector] public int collectedGems;
     [HideInInspector] public Animator animatorController;
-    public bool isGameRunning = false;
+    [HideInInspector] public bool isGameRunning = false;
 
     void Start()
     {

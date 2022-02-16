@@ -20,10 +20,6 @@ public class Collectable : MonoBehaviour
         }
         
     }
-    private void OnTriggerStay(Collider other)
-    {
-        gameObject.SetActive(false);
-    }
     private void Update()
     {
         transform.Rotate(rotation * Time.deltaTime * rotationSpeed);
