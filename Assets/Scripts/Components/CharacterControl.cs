@@ -13,10 +13,10 @@ public class CharacterControl : MonoBehaviour
     private bool damagable = true;
     private int maxHeatlh;
 
-    [HideInInspector] public int collectedGems;
+    public int collectedGems;
     public static CharacterControl Instance { get { return _instance; } }
     [HideInInspector] public Animator animatorController;
-    [HideInInspector] public bool isGameRunning = false;
+    public bool isGameRunning = false;
 
     void Start()
     {

@@ -8,10 +8,10 @@ public class GameController : MonoBehaviour
     private static GameController _instance;
 
     public static GameController Instance { get { return _instance; } }
-    [HideInInspector] public bool isFailed = false, isSuccess = false;
+    public bool isFailed = false, isSuccess = false;
 
-    [HideInInspector] public int gemMultiplier;
-    [HideInInspector] public int maxHealth;
+    public int gemMultiplier;
+    public int maxHealth;
 
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject InGameMenu;
