@@ -32,7 +32,7 @@ public class ObjectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(info.prefab, info.container.transform);
             float xPos = Random.Range(-info.xPositionLimit, info.xPositionLimit);
-            float zPos = (info.prefabSize * i) + Random.Range(0, 5);
+            float zPos = (info.prefabSize * i) + Random.Range(0, 3);
             while (info.poolObjects.Find(x => x.transform.position.z <= (zPos + info.prefabSize) && x.transform.position.z >= (zPos - info.prefabSize)) != null)
                 zPos += info.prefabSize;
             
