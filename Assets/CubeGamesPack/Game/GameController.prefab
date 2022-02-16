@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7789355861074244223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7789355861074244221}
+  - component: {fileID: 7789355861074244220}
+  - component: {fileID: 7789355861074244194}
+  - component: {fileID: 7789355861074244192}
+  - component: {fileID: 7789355861074244195}
+  - component: {fileID: 7789355861074244193}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7789355861074244221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789355861074244223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7789355861074244220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789355861074244223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79deaaccb05657a4cac31b4d39a62a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
+  InGameMenu: {fileID: 0}
+  passedMenu: {fileID: 0}
+  failedMenu: {fileID: 0}
+  isFailed: 0
+  isSuccess: 0
+  gemMultiplier: 0
+  maxHealth: 0
+--- !u!114 &7789355861074244194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789355861074244223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fee7efa143539459893cb44c911e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+--- !u!114 &7789355861074244192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789355861074244223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbe3799e7e341c4fb6d77a2d3091056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolInfos:
+  - prefab: {fileID: 1000013931470818, guid: 5c02591794acece409986647ed6329a7, type: 3}
+    container: {fileID: 0}
+    poolSize: 10
+    prefabSize: 2
+    xPositionLimit: 1.5
+    zPositionLimit: 100
+    yPosition: 0.5
+    poolObjects: []
+  - prefab: {fileID: 157148, guid: e013b60eb0eec284ba3dce713b6ebf9b, type: 3}
+    container: {fileID: 0}
+    poolSize: 10
+    prefabSize: 5
+    xPositionLimit: 1
+    zPositionLimit: 90
+    yPosition: 0
+    poolObjects: []
+--- !u!114 &7789355861074244195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789355861074244223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de9e963a6c65cf49bbf157b6af70583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreTxt: {fileID: 0}
+  healthTxt: {fileID: 0}
+  levelTxt: {fileID: 0}
+--- !u!114 &7789355861074244193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789355861074244223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7943d6db7fde3c4585202b31b708584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gemMultiplierBtn: {fileID: 0}
+  gemMultiplierPriceTxt: {fileID: 0}
+  gemMultiplierCurrentTxt: {fileID: 0}
+  healthUpgradeBtn: {fileID: 0}
+  healthUpgradePriceTxt: {fileID: 0}
+  healthUpgradeCurrentTxt: {fileID: 0}
+  notEnoughMoneyTxt: {fileID: 0}
+  shopMenu: {fileID: 0}
+  maxMultiplier: 5
+  maxHealthUpgrade: 5

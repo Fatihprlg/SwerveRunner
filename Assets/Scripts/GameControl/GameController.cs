@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
         totalGems = PlayerPrefs.GetInt("TotalGems", 0);
         maxHealth = PlayerPrefs.GetInt("MaxHealth", 3);
         mainMenu.SetActive(true);
+        Debug.Log(mainMenu.transform.position);
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -48,8 +49,8 @@ public class GameController : MonoBehaviour
         {
             CharacterControl.Instance.isGameRunning = true;
             CharacterControl.Instance.animatorController.SetBool("isRunning", true);
-            mainMenu.SetActive(false);
-            InGameMenu.SetActive(true);
+            this.mainMenu.SetActive(false);
+            this.InGameMenu.SetActive(true);
         }
     }
 
