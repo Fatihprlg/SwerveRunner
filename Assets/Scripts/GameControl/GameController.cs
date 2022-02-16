@@ -25,7 +25,6 @@ public class GameController : MonoBehaviour
         totalGems = PlayerPrefs.GetInt("TotalGems", 0);
         maxHealth = PlayerPrefs.GetInt("MaxHealth", 3);
         mainMenu.SetActive(true);
-        Debug.Log(mainMenu.transform.position);
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 806079564034721186}
   - component: {fileID: 806079564034721199}
-  - component: {fileID: 806079564034721184}
   - component: {fileID: 806079564034721185}
   - component: {fileID: 806079564034721198}
   m_Layer: 0
@@ -42,18 +41,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806079564034721187}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &806079564034721184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 806079564034721187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b4e9930253902a448957097913f6967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &806079564034721185
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -181,5 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  winCamPos: {fileID: 0}
   offset: {x: 0, y: 3.6, z: -3.6}
   camSpeed: 3

@@ -603,6 +603,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 919132149622765486}
+    - target: {fileID: 806079564967504162, guid: 5a4ad60c3f1c2b6488e416f24d57b236, type: 3}
+      propertyPath: winCamPos
+      value: 
+      objectReference: {fileID: 7470024589094422645}
     - target: {fileID: 806079564967504163, guid: 5a4ad60c3f1c2b6488e416f24d57b236, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -772,6 +776,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b39f99b66a7b7d4488ec6e49ee74ff40, type: 3}
+--- !u!1 &7470024589094422645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 812136850, guid: b39f99b66a7b7d4488ec6e49ee74ff40, type: 3}
+  m_PrefabInstance: {fileID: 7470024589094422644}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7789355861068555410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -787,6 +796,10 @@ PrefabInstance:
       propertyPath: poolInfos.Array.data[1].container
       value: 
       objectReference: {fileID: 244401605}
+    - target: {fileID: 7789355861074244192, guid: 1dc24b6625dc16649ad6b4da15f25b13, type: 3}
+      propertyPath: poolInfos.Array.data[1].yPosition
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7789355861074244193, guid: 1dc24b6625dc16649ad6b4da15f25b13, type: 3}
       propertyPath: shopMenu
       value: 
