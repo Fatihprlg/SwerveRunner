@@ -6,11 +6,13 @@ public class ObjectPool : MonoBehaviour
 {
     private static ObjectPool _instance;
 
-    public static ObjectPool Instance { get { return _instance; } }
     [SerializeField] List<PoolInfo> poolInfos;
+   
+    public static ObjectPool Instance { get { return _instance; } }
 
     private void Start()
     {
+        
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -33,17 +35,23 @@ public class ObjectPool : MonoBehaviour
             GameObject obj = Instantiate(info.prefab, info.container.transform);
             float xPos = Random.Range(-info.xPositionLimit, info.xPositionLimit);
             float zPos = (info.prefabSize * i) + Random.Range(0, 3);
-            while (info.poolObjects.Find(x => x.transform.position.z <= (zPos + info.prefabSize) && x.transform.position.z >= (zPos - info.prefabSize)) != null)
+
+            obj.transform.position = new Vector3(xPos, info.yPosition, zPos);
+
+            while (info.poolObjects.Find(x => Vector3.Distance(x.transform.position, obj.transform.position) < info.prefabSize) != null)
+            { 
                 zPos += info.prefabSize;
+                obj.transform.position = new Vector3(xPos, info.yPosition, zPos);
+            }
             
             if (zPos > info.zPositionLimit)
                 obj.SetActive(false);
-
-            obj.transform.position = new Vector3(xPos, info.yPosition, zPos);
-                
             info.poolObjects.Add(obj);
         }
     }
+
+
+
 
     public void RelocatePooledObject(GameObject obj)
     {
@@ -57,12 +65,12 @@ public class ObjectPool : MonoBehaviour
         }
         if(poolInfo != null)
         {
-            float zPos = (poolInfo.prefabSize * poolInfo.poolSize) + Random.Range(1, 5);
-            //Debug.Log(poolInfo.zPositionLimit);
-            //Debug.Log(obj.name + " obj relocated: old: " + obj.transform.position + " new: (" + 0 + ", " + 0 + ", " + zPos + ")");
+            float zPos = (poolInfo.prefabSize * poolInfo.poolSize);
+            Debug.Log("PosLimit: " + poolInfo.zPositionLimit + "\n" +
+                obj.name + " obj relocated: old: " + obj.transform.position + " new: (" + 0 + ", " + 0 + ", " + (obj.transform.position.z + zPos) + ")\n" +
+                "enabled: " + (obj.transform.position.z <= poolInfo.zPositionLimit));
             obj.transform.position += new Vector3(0, 0, zPos);
             obj.SetActive(obj.transform.position.z <= poolInfo.zPositionLimit);
-            //Debug.Log("enabled: " + (obj.transform.position.z <= poolInfo.zPositionLimit));
         }
     }
 }

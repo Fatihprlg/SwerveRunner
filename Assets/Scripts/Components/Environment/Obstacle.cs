@@ -5,6 +5,8 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] int damage = 1;
+    [SerializeField] bool isPooled = true;
+    [SerializeField] bool moving;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,6 +14,11 @@ public class Obstacle : MonoBehaviour
         if (characterControl != null)
         {
             characterControl.DealDamage(damage);
+        }
+        else
+        if (isPooled && !moving)
+        {
+            ObjectPool.Instance.RelocatePooledObject(this.gameObject);
         }
     }
 

@@ -8,6 +8,7 @@ public class Collectable : MonoBehaviour
     [SerializeField] Vector3 rotation = Vector3.up;
     [SerializeField] float rotationSpeed = 100f;
     [SerializeField] bool isPooled = true;
+    [SerializeField] GameObject collectParticle;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,12 +17,15 @@ public class Collectable : MonoBehaviour
         {
             characterControl.TakeGem();
             gameObject.SetActive(false);
-            if (isPooled) ObjectPool.Instance.RelocatePooledObject(gameObject);
+            GameObject effect = Instantiate(collectParticle, transform.position, Quaternion.identity);
+            Destroy(effect, 2);
         }
+        if (isPooled) ObjectPool.Instance.RelocatePooledObject(this.gameObject);
         
     }
     private void Update()
     {
         transform.Rotate(rotation * Time.deltaTime * rotationSpeed);
     }
+
 }
