@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        //PlayerPrefs.DeleteAll();
         gemMultiplier = PlayerPrefs.GetInt("GemsMultiplier", 1);
         totalGems = PlayerPrefs.GetInt("TotalGems", 0);
         maxHealth = PlayerPrefs.GetInt("MaxHealth", 3);
@@ -77,7 +78,7 @@ public class GameController : MonoBehaviour
 
     public void NextLevel()
     {
-        if (SceneManager.sceneCount >= SceneManager.GetActiveScene().buildIndex + 2)
+        if (SceneManager.sceneCountInBuildSettings >= SceneManager.GetActiveScene().buildIndex + 2)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         else ReturnMenu();
         
@@ -87,9 +88,9 @@ public class GameController : MonoBehaviour
     {
         if (totalGems >= (gemMultiplier * 10))
         {
+            totalGems -= (gemMultiplier * 10);
             gemMultiplier++;
             PlayerPrefs.SetInt("GemsMultiplier", gemMultiplier);
-            totalGems -= (maxHealth * 20);
             PlayerPrefs.SetInt("TotalGems", totalGems);
             return true;
         }
@@ -99,9 +100,9 @@ public class GameController : MonoBehaviour
     {
         if (totalGems >= (maxHealth * 20))
         {
+            totalGems -= (maxHealth * 20);
             maxHealth++;
             PlayerPrefs.SetInt("MaxHealth", maxHealth);
-            totalGems -= (maxHealth * 20);
             PlayerPrefs.SetInt("TotalGems", totalGems);
             CharacterControl.Instance.Refresh();
             return true;

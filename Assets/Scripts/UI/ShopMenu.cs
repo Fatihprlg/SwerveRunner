@@ -9,6 +9,7 @@ public class ShopMenu : MonoBehaviour
 
     [SerializeField] Button gemMultiplierBtn;
     [SerializeField] TextMeshProUGUI gemMultiplierPriceTxt;
+    [SerializeField] TextMeshProUGUI totalGemsTxt;
     [SerializeField] Text gemMultiplierCurrentTxt;
     [SerializeField] Button healthUpgradeBtn;
     [SerializeField] TextMeshProUGUI healthUpgradePriceTxt;
@@ -24,14 +25,13 @@ public class ShopMenu : MonoBehaviour
 
     void Start()
     {
-        
         maxHealth = PlayerPrefs.GetInt("MaxHealth", 3);
         gemMultiplier = PlayerPrefs.GetInt("GemsMultiplier", 1);
 
-        gemMultiplierPriceTxt.text = (gemMultiplier * 10).ToString();
+        /*gemMultiplierPriceTxt.text = (gemMultiplier * 10).ToString();
         gemMultiplierCurrentTxt.text = gemMultiplier.ToString();
         healthUpgradePriceTxt.text = (maxHealth * 20).ToString();
-        healthUpgradeCurrentTxt.text = maxHealth.ToString();
+        healthUpgradeCurrentTxt.text = maxHealth.ToString();*/
 
         CheckMultipliers();
 
@@ -47,8 +47,8 @@ public class ShopMenu : MonoBehaviour
             if (isSuccess)
             {
                 maxHealth++;
-                healthUpgradeCurrentTxt.text = maxHealth.ToString();
-                healthUpgradePriceTxt.text = (maxHealth * 20).ToString();
+/*                healthUpgradeCurrentTxt.text = maxHealth.ToString();
+                healthUpgradePriceTxt.text = (maxHealth * 20).ToString();*/
                 InGameUI.Instance.UpdateHealthTxt(maxHealth);
             }
             else StartCoroutine(ShowMoneyTxt());
@@ -67,8 +67,8 @@ public class ShopMenu : MonoBehaviour
             if (isSuccess)
             {
                 gemMultiplier++;
-                gemMultiplierCurrentTxt.text = gemMultiplier.ToString();
-                gemMultiplierPriceTxt.text = (gemMultiplier * 10).ToString();
+/*                gemMultiplierCurrentTxt.text = gemMultiplier.ToString();
+                gemMultiplierPriceTxt.text = (gemMultiplier * 10).ToString();*/
             }
             else StartCoroutine(ShowMoneyTxt());
 
@@ -85,6 +85,11 @@ public class ShopMenu : MonoBehaviour
 
     private void CheckMultipliers()
     {
+        gemMultiplierPriceTxt.text = (gemMultiplier * 10).ToString();
+        gemMultiplierCurrentTxt.text = gemMultiplier.ToString();
+        healthUpgradePriceTxt.text = (maxHealth * 20).ToString();
+        healthUpgradeCurrentTxt.text = maxHealth.ToString();
+
         if (gemMultiplier == maxMultiplier)
         {
             gemMultiplierBtn.interactable = false;
@@ -95,8 +100,10 @@ public class ShopMenu : MonoBehaviour
             healthUpgradeBtn.interactable = false;
             healthUpgradePriceTxt.text = "MAX";
         }
+
+        totalGemsTxt.text = PlayerPrefs.GetInt("TotalGems", 0).ToString();
     }
-    
+
     IEnumerator ShowMoneyTxt()
     {
         notEnoughMoneyTxt.SetActive(true);

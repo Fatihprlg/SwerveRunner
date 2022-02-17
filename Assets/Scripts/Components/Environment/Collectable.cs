@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-  //  [SerializeField] int point = 1;
     [SerializeField] Vector3 rotation = Vector3.up;
     [SerializeField] float rotationSpeed = 100f;
     [SerializeField] bool isPooled = true;

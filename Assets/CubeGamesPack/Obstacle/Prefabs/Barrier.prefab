@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   isPooled: 1
-  moving: 0
+  special: 0
 --- !u!54 &2307149038215772046
 Rigidbody:
   m_ObjectHideFlags: 0

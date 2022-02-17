@@ -355,6 +355,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 782146912221183934, guid: 773f5f3ae76ceac4d9ad525981da40a2, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 782146912436663332, guid: 773f5f3ae76ceac4d9ad525981da40a2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -466,6 +470,14 @@ PrefabInstance:
     - target: {fileID: 782146913106726510, guid: 773f5f3ae76ceac4d9ad525981da40a2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReturnMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 782146913125101622, guid: 773f5f3ae76ceac4d9ad525981da40a2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1053293389328270571}
+    - target: {fileID: 782146913125101622, guid: 773f5f3ae76ceac4d9ad525981da40a2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackButton
       objectReference: {fileID: 0}
     - target: {fileID: 782146913651436042, guid: 773f5f3ae76ceac4d9ad525981da40a2, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -653,6 +665,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &798490000 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6276100252044440816, guid: 773f5f3ae76ceac4d9ad525981da40a2, type: 3}
+  m_PrefabInstance: {fileID: 798489983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &832164988
@@ -857,7 +880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7789355861074244192, guid: 1dc24b6625dc16649ad6b4da15f25b13, type: 3}
       propertyPath: poolInfos.Array.data[2].xPositionLimit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7789355861074244192, guid: 1dc24b6625dc16649ad6b4da15f25b13, type: 3}
       propertyPath: poolInfos.Array.data[2].zPositionLimit
@@ -865,7 +888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7789355861074244192, guid: 1dc24b6625dc16649ad6b4da15f25b13, type: 3}
       propertyPath: poolInfos.Array.data[3].xPositionLimit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7789355861074244192, guid: 1dc24b6625dc16649ad6b4da15f25b13, type: 3}
       propertyPath: poolInfos.Array.data[3].zPositionLimit
@@ -875,6 +898,10 @@ PrefabInstance:
       propertyPath: shopMenu
       value: 
       objectReference: {fileID: 798489984}
+    - target: {fileID: 7789355861074244193, guid: 1dc24b6625dc16649ad6b4da15f25b13, type: 3}
+      propertyPath: totalGemsTxt
+      value: 
+      objectReference: {fileID: 798490000}
     - target: {fileID: 7789355861074244193, guid: 1dc24b6625dc16649ad6b4da15f25b13, type: 3}
       propertyPath: gemMultiplierBtn
       value: 
