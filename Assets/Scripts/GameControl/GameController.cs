@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        //PlayerPrefs.DeleteAll();
         gemMultiplier = PlayerPrefs.GetInt("GemsMultiplier", 1);
         totalGems = PlayerPrefs.GetInt("TotalGems", 0);
         maxHealth = PlayerPrefs.GetInt("MaxHealth", 3);

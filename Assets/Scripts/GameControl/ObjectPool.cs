@@ -65,11 +65,7 @@ public class ObjectPool : MonoBehaviour
         }
         if(poolInfo != null)
         {
-            //poolInfo.poolObjects.Remove(obj);
             float zPos = (poolInfo.prefabSize * poolInfo.poolSize);
-            /*Debug.Log("PosLimit: " + poolInfo.zPositionLimit + "\n" +
-                obj.name + " obj relocated: old: " + obj.transform.position + " new: (" + 0 + ", " + 0 + ", " + (obj.transform.position.z + zPos) + ")\n" +
-                "enabled: " + (obj.transform.position.z <= poolInfo.zPositionLimit));*/
             obj.transform.position += new Vector3(0, 0, zPos);
             while (poolInfo.poolObjects.Find(x => Vector3.Distance(x.transform.position, obj.transform.position) < poolInfo.prefabSize && obj != x) != null)
             {
