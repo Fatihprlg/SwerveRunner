@@ -95,7 +95,7 @@ MonoBehaviour:
     prefabSize: 5
     xPositionLimit: 1
     zPositionLimit: 90
-    yPosition: 0
+    yPosition: 0.01
     poolObjects: []
 --- !u!114 &7789355861074244195
 MonoBehaviour:

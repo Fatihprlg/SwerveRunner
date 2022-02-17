@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour
 {
-    [SerializeField] private float verticalSpeed = 5, horizontalSpeed = 2;
+    [SerializeField] private float verticalSpeed = 5, horizontalSpeed = 0.5f;
     [SerializeField] private Renderer charRenderer;
 
     private static CharacterControl _instance;
@@ -22,8 +22,7 @@ public class CharacterControl : MonoBehaviour
 
     void Start()
     {
-        maxHeatlh = PlayerPrefs.GetInt("MaxHealth", 3);
-        health = maxHeatlh;
+        Refresh();
         swerveInp = GetComponent<SwerveInput>();
         animatorController = GetComponent<Animator>();
         collectedGems = 0;
@@ -78,7 +77,7 @@ public class CharacterControl : MonoBehaviour
     {
         float horizontalMove = horizontalSpeed * swerveInp.MoveFactorX * Time.deltaTime;
 
-        horizontalMove = Mathf.Clamp(horizontalMove, -1, 1);
+        horizontalMove = Mathf.Clamp(horizontalMove, -1f, .1f);
 
         transform.Translate(horizontalMove, 0, verticalSpeed * Time.deltaTime);
         var pos = transform.position;

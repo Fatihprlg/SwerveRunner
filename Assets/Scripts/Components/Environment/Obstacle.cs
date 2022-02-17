@@ -6,7 +6,8 @@ public class Obstacle : MonoBehaviour
 {
     [SerializeField] int damage = 1;
     [SerializeField] bool isPooled = true;
-    [SerializeField] bool moving;
+    [SerializeField] bool special;
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +17,7 @@ public class Obstacle : MonoBehaviour
             characterControl.DealDamage(damage);
         }
         else
-        if (isPooled && !moving)
+        if (isPooled && !special)
         {
             ObjectPool.Instance.RelocatePooledObject(this.gameObject);
         }

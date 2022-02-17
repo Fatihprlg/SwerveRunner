@@ -66,9 +66,9 @@ public class ObjectPool : MonoBehaviour
         if(poolInfo != null)
         {
             float zPos = (poolInfo.prefabSize * poolInfo.poolSize);
-            Debug.Log("PosLimit: " + poolInfo.zPositionLimit + "\n" +
+            /*Debug.Log("PosLimit: " + poolInfo.zPositionLimit + "\n" +
                 obj.name + " obj relocated: old: " + obj.transform.position + " new: (" + 0 + ", " + 0 + ", " + (obj.transform.position.z + zPos) + ")\n" +
-                "enabled: " + (obj.transform.position.z <= poolInfo.zPositionLimit));
+                "enabled: " + (obj.transform.position.z <= poolInfo.zPositionLimit));*/
             obj.transform.position += new Vector3(0, 0, zPos);
             obj.SetActive(obj.transform.position.z <= poolInfo.zPositionLimit);
         }

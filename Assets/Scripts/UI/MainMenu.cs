@@ -38,15 +38,17 @@ public class MainMenu : MonoBehaviour
 
         if(isSoundMuted == 1)
         {
-            soundButton.GetComponent<Image>().color = new Color(126, 126, 126);
+            soundButton.GetComponent<Image>().color = new Color32(126, 126, 126, 255);
             PlayerPrefs.SetInt("isSoundMuted", 0);
             AudioListener.volume = 1;
+            isSoundMuted = 0;
         }
         else
         {
             soundButton.GetComponent<Image>().color = Color.white;
             PlayerPrefs.SetInt("isSoundMuted", 1);
             AudioListener.volume = 0;
+            isSoundMuted = 1;
         }
     }
     

@@ -33,6 +33,8 @@ public class ShopMenu : MonoBehaviour
         healthUpgradePriceTxt.text = (maxHealth * 20).ToString();
         healthUpgradeCurrentTxt.text = maxHealth.ToString();
 
+        CheckMultipliers();
+
     }
 
 
@@ -47,16 +49,15 @@ public class ShopMenu : MonoBehaviour
                 maxHealth++;
                 healthUpgradeCurrentTxt.text = maxHealth.ToString();
                 healthUpgradePriceTxt.text = (maxHealth * 20).ToString();
+                InGameUI.Instance.UpdateHealthTxt(maxHealth);
             }
             else StartCoroutine(ShowMoneyTxt());
         }
 
-        if (maxHealth == maxHealthUpgrade)
-        {
-            healthUpgradeBtn.interactable = false;
-        }
+        CheckMultipliers();
 
     }
+
     public void UpgradeGemMultiplier()
     {
         bool isSuccess = false;
@@ -73,10 +74,7 @@ public class ShopMenu : MonoBehaviour
 
         }
 
-        if (gemMultiplier == maxMultiplier)
-        {
-            gemMultiplierBtn.interactable = false;  
-        }
+        CheckMultipliers();
     }
     
     public void BackButton()
@@ -85,10 +83,25 @@ public class ShopMenu : MonoBehaviour
         MainMenu.Instance.Refresh();
     }
 
+    private void CheckMultipliers()
+    {
+        if (gemMultiplier == maxMultiplier)
+        {
+            gemMultiplierBtn.interactable = false;
+            gemMultiplierPriceTxt.text = "MAX";
+        }
+        if (maxHealth == maxHealthUpgrade)
+        {
+            healthUpgradeBtn.interactable = false;
+            healthUpgradePriceTxt.text = "MAX";
+        }
+    }
+    
     IEnumerator ShowMoneyTxt()
     {
         notEnoughMoneyTxt.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         notEnoughMoneyTxt.SetActive(false);
     }
+
 }
